@@ -57,69 +57,57 @@ module.exports = {
         return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
-      res.json(video);
+      res.json(thought);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
   },
-  async deleteVideo(req, res) {
+  async deleteThoughts(req, res) {
     try {
-      const video = await Video.findOneAndRemove({ _id: req.params.videoId });
+      const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtsId });
 
-      if (!video) {
-        return res.status(404).json({ message: 'No video with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
-      const user = await User.findOneAndUpdate(
-        { videos: req.params.videoId },
-        { $pull: { videos: req.params.videoId } },
-        { new: true }
-      );
-
-      if (!user) {
-        return res
-          .status(404)
-          .json({ message: 'Video created but no user with this id!' });
-      }
-
-      res.json({ message: 'Video successfully deleted!' });
+      res.json({ message: 'Thought successfully deleted!' });
     } catch (err) {
       res.status(500).json(err);
     }
   },
-  // Add a video response
-  async addVideoResponse(req, res) {
+  // Add a Thought reaction
+  async addThoughtReaction(req, res) {
     try {
-      const video = await Video.findOneAndUpdate(
-        { _id: req.params.videoId },
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtsId },
         { $addToSet: { responses: req.body } },
         { runValidators: true, new: true }
       );
 
-      if (!video) {
-        return res.status(404).json({ message: 'No video with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this id!' });
       }
 
-      res.json(video);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
   },
-  // Remove video response
-  async removeVideoResponse(req, res) {
+  // Remove thought reaction
+  async removeThoughtReaction(req, res) {
     try {
-      const video = await Video.findOneAndUpdate(
-        { _id: req.params.videoId },
-        { $pull: { reactions: { responseId: req.params.responseId } } },
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtsId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       )
 
-      if (!video) {
-        return res.status(404).json({ message: 'No video with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
-      res.json(video);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
