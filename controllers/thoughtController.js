@@ -9,21 +9,21 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  async getThoughts(req, res) {
+  async getSingleThoughts(req, res) {
     try {
-      const thoughts = await Thought.findOne({ _id: req.params.videoId })
+      const thoughts = await Thought.findOne({ _id: req.params.thoughtsId })
 
-      if (!thoughts) {
+      if (!thought) {
         return res.status(404).json({ message: 'No thoughts with that ID' });
       }
 
-      res.json(thoughts);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
   },
-  // create a new video
-  async createVideo(req, res) {
+  // create a new Thoughts  //continue from here
+  async createThoughts(req, res) {
     try {
       const thoughts = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
