@@ -9,11 +9,11 @@ const {
   removeThoughtReaction,
 } = require('../../controllers/thoughtController');
 
-// /api/thoughtss
+// /api/thoughts
 //http://localhost:3001/api/Thoughts
 router.route('/').get(getThoughts).post(createThoughts);
 
-// /api/videos/:videoId
+// /api/videos/:thoughtId
 router
   .route('/:thoughtId')
   .get(getSingleThoughts)

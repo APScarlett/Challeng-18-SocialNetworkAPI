@@ -1,5 +1,5 @@
 {
-  "name": "25-Ins_Mongoose-CRUD",
+  "name": "Mongoose API",
   "version": "1.0.1",
   "description": "Instructor demo for CRUD operations in Mongoose on subdocuments",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.4.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.9"
