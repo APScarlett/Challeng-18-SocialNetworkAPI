@@ -15,7 +15,7 @@ router.route('/').get(getThoughts).post(createThoughts);
 
 // /api/videos/:thoughtId
 router
-  .route('/:thoughtId')
+  .route('/:thoughtsId')
   .get(getSingleThoughts)
   .put(updateThoughts)
   .delete(deleteThoughts);
@@ -25,6 +25,6 @@ router
 router.route('/:thoughtId/reactions').post(addThoughtReaction);
 
 // /api/thoughts/:thoughtId/reactions/:reactionId
-router.route('/:thoughtId/reactions/:reactionId').delete(removeThoughtReaction);
+router.route('/:thoughtsId/reactions/:reactionId').delete(removeThoughtReaction);
 
 module.exports = router;
