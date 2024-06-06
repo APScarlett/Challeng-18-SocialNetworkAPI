@@ -11,10 +11,10 @@ module.exports = {
   },
   async getSingleThoughts(req, res) {
     try {
-      const thoughts = await Thought.findOne({ _id: req.params.thoughtsId })
+      const thought = await Thought.findOne({ _id: req.params.thoughtsId })
 
       if (!thought) {
-        return res.status(404).json({ message: 'No thoughts with that ID' });
+        return res.status(404).json({ message: 'No thought with that ID' });
       }
 
       res.json(thought);
@@ -81,7 +81,7 @@ module.exports = {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtsId },
-        { $addToSet: { responses: req.body } },
+        { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
 
@@ -94,7 +94,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Remove thought reaction
+  // Remove Thought response
   async removeThoughtReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
