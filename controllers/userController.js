@@ -1,14 +1,16 @@
 const User = require('../models/User');
 const Thought = require('../models/Thought');
 module.exports = {
-     async getUsers(req, res) {
+  //get all users
+  async getUsers(req, res) {
     try {
-      const users = await User.find().populate("friends").populate("thoughts");
+      const users = await User.find();
       res.json(users);
     } catch (err) {
       res.status(500).json(err);
     }
   },
+  //get a single user
   async getSingleUser(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
@@ -27,15 +29,15 @@ module.exports = {
   // create a new user
   async createUser(req, res) {
     try {
-      const dbUserData = await User.create(req.body);
-      res.json(dbUserData);
+      const userData = await User.create(req.body);
+      res.json(userData);
     } catch (err) {
       res.status(500).json(err);
     }
 },
 
 //update a user
-async updateUser (req, res) {
+async updateUser(req, res) {
   try {
     const user = await User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -99,7 +101,7 @@ async addUserFriend(req, res) {
   }
 },
 
-// Removes a user reaction
+// Removes a user Friend
 async removeUserFriend(req, res) {
   try {
     const user = await User.findOneAndUpdate(
