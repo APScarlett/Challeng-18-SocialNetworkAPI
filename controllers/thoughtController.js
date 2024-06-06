@@ -22,38 +22,39 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+
   // create a new Thoughts  //continue from here
   async createThoughts(req, res) {
     try {
-      const thoughts = await Thought.create(req.body);
+      const thought = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
-        { _id: req.body.userId },
-        { $addToSet: { thoughts: video._id } },
+        {username: req.body.username},
+        { $addToSet: { thoughts: thought._id } },
         { new: true }
       );
       //!undefined
       if (!user) {
         return res.status(404).json({
-          message: 'Video created, but found no user with that ID',
+          message: 'Thought created, but found no user with that ID',
         });
       }
 
-      res.json('Created the video 🎉');
+      res.json('Created the Thought 🎉');
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
   },
-  async updateVideo(req, res) {
+  async updateThoughts(req, res) {
     try {
-      const video = await Video.findOneAndUpdate(
-        { _id: req.params.videoId },
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtsId },
         { $set: req.body },
         { runValidators: true, new: true }
       );
 
-      if (!video) {
-        return res.status(404).json({ message: 'No video with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No Thought with this id!' });
       }
 
       res.json(video);
