@@ -4,7 +4,7 @@ const reactionSchema = require('./Reaction');
 // Schema to create Post model
 const thoughtSchema = new Schema(
   {
-    toughtText: {
+    thoughtText: {
       type: String,
       required:true,
       minLength: 1,
@@ -38,6 +38,6 @@ thoughtSchema
   });
 
 // Initialize our Video model
-const Thought = model('thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;

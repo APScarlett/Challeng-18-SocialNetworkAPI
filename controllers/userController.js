@@ -4,7 +4,7 @@ module.exports = {
   //get all users
   async getUsers(req, res) {
     try {
-      const users = await User.find();
+      const users = (await User.find());
       res.json(users);
     } catch (err) {
       res.status(500).json(err);
@@ -81,7 +81,7 @@ async deleteUser(req, res) {
     res.status(500).json(err);
   }
 },
-
+//add friend
 async addUserFriend(req, res) {
   try {
         const user = await User.findOneAndUpdate(
